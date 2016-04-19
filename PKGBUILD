@@ -2,7 +2,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kwin
-pkgver=5.6.2
+pkgver=5.6.3
 pkgrel=1
 pkgdesc='KDE Window manager'
 arch=('i686' 'x86_64')
@@ -15,7 +15,7 @@ groups=('plasma')
 install=${pkgname}.install
 conflicts=('kdebase-workspace')
 source=("http://download.kde.org/stable/plasma/${pkgver}/${pkgname}-${pkgver}.tar.xz")
-md5sums=('ed75b28b1bb150398f982a024ead1c5f')
+md5sums=('c007cd5a6ecf2611a415062259f335d0')
 
 prepare() {
   mkdir -p build
@@ -26,8 +26,8 @@ build() {
   cmake ../${pkgname}-${pkgver} \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
-    -DLIB_INSTALL_DIR=lib \
-    -DLIBEXEC_INSTALL_DIR=lib \
+    -DKDE_INSTALL_LIBDIR=lib \
+    -DKDE_INSTALL_LIBEXECDIR=lib \
     -DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
     -DBUILD_TESTING=OFF
   make
