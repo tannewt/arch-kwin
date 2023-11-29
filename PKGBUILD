@@ -3,22 +3,78 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kwin
-pkgver=5.27.9
+pkgver=5.90.0
 _dirver=$(echo $pkgver | cut -d. -f1-3)
 pkgrel=1
 pkgdesc='An easy to use, but flexible, composited Window Manager'
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
 license=(LGPL)
-depends=(kscreenlocker xcb-util-cursor plasma-framework5 kcmutils5 breeze
-         pipewire-session-manager libqaccessibilityclient lcms2 libxcvt)
-makedepends=(extra-cmake-modules qt5-tools kdoctools5 krunner5 wayland-protocols plasma-wayland-protocols python)
+depends=(breeze
+         gcc-libs
+         glibc
+         plasma-activities
+         kauth
+         kcmutils
+         kcolorscheme
+         kconfig
+         kconfigwidgets
+         kcoreaddons
+         kcrash
+         kdbusaddons
+         kdeclarative # QML
+         kdecoration
+         kglobalaccel
+         kglobalacceld
+         ki18n
+         kidletime
+         knewstuff
+         knotifications
+         kpackage
+         kscreenlocker
+         kservice
+         ksvg
+         kwayland
+         kwidgetsaddons
+         kwindowsystem
+         kxmlgui
+         lcms2
+         libdisplay-info
+         libdrm
+         libepoxy
+         libinput
+         libpipewire
+         libqaccessibilityclient-qt6
+         libx11
+         libxcb
+         libxcvt
+         libxi
+         libxkbcommon
+         libxkbcommon-x11
+         mesa
+         pipewire-session-manager
+         libplasma
+         qt6-base
+         qt6-declarative
+         qt6-multimedia
+         qt6-sensors
+         qt6-tools
+         systemd-libs
+         wayland
+         xcb-util-cursor
+         xcb-util-keysyms
+         xcb-util-wm)
+makedepends=(extra-cmake-modules
+             kdoctools
+             krunner
+             plasma-wayland-protocols
+             python
+             wayland-protocols)
 optdepends=('maliit-keyboard: virtual keyboard for kwin-wayland')
-replaces=(kwayland-server)
 groups=(plasma)
-source=(https://download.kde.org/stable/plasma/$_dirver/$pkgname-$pkgver.tar.xz{,.sig})
+source=(https://download.kde.org/unstable/plasma/$_dirver/$pkgname-$pkgver.tar.xz{,.sig})
 install=$pkgname.install
-sha256sums=('d94f691fa6f88966d74d1307554cda59847d5907539f86e79171170a655578bb'
+sha256sums=('4866568edb9d2bae8e3570a7a492a36b2f2483f9d3a520eb88a62cbfdd54a5e1'
             'SKIP')
 validpgpkeys=('E0A3EB202F8E57528E13E72FD7574483BB57B18D'  # Jonathan Esk-Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
@@ -26,7 +82,7 @@ validpgpkeys=('E0A3EB202F8E57528E13E72FD7574483BB57B18D'  # Jonathan Esk-Riddell
               '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
 
 build() {
-  cmake -B build -S $pkgname-$pkgver \
+  cmake -B build  -S $pkgname-$pkgver \
     -DCMAKE_INSTALL_LIBEXECDIR=lib \
     -DBUILD_TESTING=OFF
   cmake --build build
